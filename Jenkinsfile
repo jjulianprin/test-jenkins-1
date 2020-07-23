@@ -3,29 +3,29 @@
 pipeline {
  agent any
  stages {
-        stage('Checkout-git'){
+        stage('CheckingGitRepository'){
                steps{
 		git poll: true, url: 'https://github.com/jjulianprin/test-jenkins-1.git'
                }
         }
-        stage('CreateVirtualEnv') {
+        stage('CreatingVirualEnvironment') {
             steps {
 				sh '''
 					bash -c "python3 -m venv venv && source venv/bin/activate"
 				'''
             }
         }
-        stage('InstallRequirements') {
+        stage('InstallingRequirements') {
             steps {
             	sh '''
-            		bash -c "source ${WORKSPACE}/venv/bin/activate && ${WORKSPACE}/venv/bin/python3 ${WORKSPACE}/venv/bin/pip3 install -r requirements.txt"
+            		bash -c "source ${WORKSPACE}/venv/bin/activate && pip3 install -r requirements.txt"
                 '''
             }
         }   
         stage('TestApp') {
             steps {
             	sh '''
-            		bash -c "source ${WORKSPACE}/venv/bin/activate &&  cd src && ${WORKSPACE}/venv/bin/python3 ${WORKSPACE}/venv/bin/pytest && cd .."
+            		bash -c "source ${WORKSPACE}/venv/bin/activate &&  cd src && ${WORKSPACE}/venv/bin/pytest"
                 '''
             }
         }  
