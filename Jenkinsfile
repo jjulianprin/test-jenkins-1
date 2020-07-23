@@ -1,3 +1,4 @@
+
 // comment
 pipeline {
  agent any
@@ -38,16 +39,16 @@ pipeline {
         stage('BuildDocker') {
             steps {
             	sh '''
-            		docker build -t pythonappPL:latest .
+            		docker build -t pythonapppipeline:latest .
                 '''
             }
         } 
     stage('PushDockerImage') {
             steps {
             	sh '''
-            		docker tag pythonappPL:latest jjulianprin/pythonappPL:latest
-					docker push jjulianprin/pythonappPL:latest
-					docker rmi -f pythonappPL:latest
+            		docker tag pythonapppipeline:latest jjulianprin/pythonapppipeline:latest
+					docker push jjulianprin/pythonapppipeline:latest
+					docker rmi -f pythonapppipeline:latest
                 '''
             }
         } 
